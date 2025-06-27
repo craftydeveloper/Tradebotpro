@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: tradepro-bot
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 1 --timeout 120 main:app
+    envVars:
+      - key: SESSION_SECRET
+        value: tradepro-secret-key-2025
+      - key: PYTHON_VERSION
+        value: 3.11.0
+    healthCheckPath: /healthz
